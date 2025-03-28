@@ -1,0 +1,38 @@
+<head>
+	<title>Página de Teste</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div class='titulo'>
+		<h1>Exemplo Post</h1>
+	</div>
+</body>
+<script>
+  // Adiciona um ouvinte de evento para garantir que as mensagens sejam capturadas corretamente.
+  window.addEventListener("message", (event) => {
+    console.log("Mensagem recebida da WebView:", event.data); // Este log ajuda a verificar o que chegou
+
+    try {
+      const data = JSON.parse(event.data); // Converte a string JSON de volta para um objeto
+      if (data && data.appData) {
+        console.log("appData recebido:", data.appData);
+
+        // Envia a resposta para o app React Native
+        window.ReactNativeWebView.postMessage("Mensagem recebida: " + JSON.stringify(data.appData));
+      }
+    } catch (error) {
+      console.error("Erro ao processar a mensagem:", error);
+    }
+  });
+</script>
+<style>
+	.titulo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	body {
+		padding: 10
+	}
+</style>

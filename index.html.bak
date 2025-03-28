@@ -1,0 +1,22 @@
+<head>
+	<title>Página de Teste</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div class='titulo'>
+		<h1>Exemplo Post</h1>
+	</div>
+</body>
+<script>
+</script>
+<style>
+	.titulo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	body {
+		padding: 10
+	}
+</style>
