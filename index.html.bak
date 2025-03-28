@@ -4,7 +4,10 @@
 </head>
 <body>
 	<div class='titulo'>
-		<h1>Exemplo Post</h1>
+		<h1>Exemplo Post 1</h1>
+	</div>
+	<div class='botao'>
+		<button onclick="enviarMensagemParaApp()">Enviar Mensagem para o App</button>
 	</div>
 </body>
 <script>
@@ -24,9 +27,19 @@
       console.error("Erro ao processar a mensagem:", error);
     }
   });
+  
+  function enviarMensagemParaApp() {
+      window.ReactNativeWebView.postMessage("MENSAGEM TESTE");
+    }
 </script>
 <style>
 	.titulo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.botao {
 		display: flex;
 		flex-direction: column;
 		align-items: center;

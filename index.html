@@ -4,7 +4,7 @@
 </head>
 <body>
 	<div class='titulo'>
-		<h1>Exemplo Post 1</h1>
+		<h1>Exemplo Post 2</h1>
 	</div>
 	<div class='botao'>
 		<button onclick="enviarMensagemParaApp()">Enviar Mensagem para o App</button>
@@ -16,13 +16,11 @@
     console.log("Mensagem recebida da WebView:", event.data); // Este log ajuda a verificar o que chegou
 
     try {
-      const data = JSON.parse(event.data); // Converte a string JSON de volta para um objeto
-      if (data && data.appData) {
-        console.log("appData recebido:", data.appData);
+      const data = event.data; // Converte a string JSON de volta para um objeto
+        console.log("appData recebido:", data);
 
         // Envia a resposta para o app React Native
-        window.ReactNativeWebView.postMessage("Mensagem recebida: " + JSON.stringify(data.appData));
-      }
+        window.ReactNativeWebView.postMessage("Mensagem recebida: " + data);
     } catch (error) {
       console.error("Erro ao processar a mensagem:", error);
     }
