@@ -4,22 +4,34 @@
 </head>
 <body>
 	<div class='titulo'>
-		<h1>Exemplo Post 3</h1>
+		<h1>Exemplo Post 4</h1>
 	</div>
 	<div class='botao'>
 		<button onclick="enviarMensagemParaApp()">Enviar Mensagem para o App</button>
 	</div>
 </body>
 <script>
-  // Adiciona um ouvinte para a mensagem
-  window.addEventListener("message", function(event) {
-    console.log("Mensagem recebida:", event.data); // Exibir a mensagem recebida no console
+  // Adiciona um ouvinte de evento para garantir que as mensagens sejam capturadas corretamente.
+  window.addEventListener("message", (event) => {
+    console.log("Mensagem recebida da WebView:", event.data); // Este log ajuda a verificar o que chegou
 
-    // Verifique se a mensagem é recebida corretamente
-    alert("Mensagem recebida: " + event.data);
+    try {
+      const data = JSON.parse(event.data); // Converte a string JSON de volta para um objeto
+      if (data && data.appData) {
+        console.log("appData recebido:", data.appData);
+
+        // Envia a resposta para o app React Native
+        window.ReactNativeWebView.postMessage("Mensagem recebida: " + JSON.stringify(data.appData));
+      }
+    } catch (error) {
+      console.error("Erro ao processar a mensagem:", error);
+    }
   });
+  
+  function enviarMensagemParaApp() {
+      window.ReactNativeWebView.postMessage("MENSAGEM TESTE");
+    }
 </script>
-
 <style>
 	.titulo {
 		display: flex;
